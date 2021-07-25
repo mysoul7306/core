@@ -39,6 +39,8 @@ public abstract class AbstractRepository extends DefaultTransactionDefinition {
 	protected abstract DataSourceTransactionManager getTransaction();
 	protected abstract String getRepository();
 
+	protected final String SEPARATE_STATEMENT = ".";
+
 	private TransactionStatus status;
 
 	public interface Type<T> {
@@ -111,6 +113,8 @@ public abstract class AbstractRepository extends DefaultTransactionDefinition {
 	}
 
 	protected synchronized Map<String, Object> callDatabase(QueryType mapping, String statement, Map<String, Object> param) {
+		statement = SEPARATE_STATEMENT + statement;
+
 		long startTime = 0L;
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
