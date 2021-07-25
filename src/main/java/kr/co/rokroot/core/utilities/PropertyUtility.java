@@ -6,7 +6,7 @@
 
 package kr.co.rokroot.core.utilities;
 
-import kr.co.rokroot.core.exceptions.BizException;
+import kr.co.rokroot.core.exceptions.DemoException;
 
 import java.io.InputStream;
 import java.util.Properties;
@@ -25,12 +25,12 @@ public class PropertyUtility {
 			is = PropertyUtility.class.getClassLoader().getResourceAsStream("props/" + property);
 			prop.load(is);
 		} catch (Exception e) {
-			throw new BizException("Property file not found", e);
+			throw new DemoException("Property file not found", e);
 		} finally {
 			try {
 				is.close();
 			} catch (Exception e) {
-				throw new BizException("input stream error occurred", e);
+				throw new DemoException("input stream error occurred", e);
 			}
 		}
 

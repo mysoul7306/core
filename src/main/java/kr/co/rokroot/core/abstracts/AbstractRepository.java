@@ -6,7 +6,7 @@
 
 package kr.co.rokroot.core.abstracts;
 
-import kr.co.rokroot.core.exceptions.BizException;
+import kr.co.rokroot.core.exceptions.DemoException;
 import kr.co.rokroot.core.type.QueryType;
 import kr.co.rokroot.core.type.ResultType;
 import kr.co.rokroot.core.utilities.ObjectUtility;
@@ -143,7 +143,7 @@ public abstract class AbstractRepository extends DefaultTransactionDefinition {
 		} catch (TransactionException e) {
 			throw new TransactionTimedOutException("Transaction timeout, Default timeout(ms) : " + this.getTransaction().getDefaultTimeout() * 1000);
 		} catch (Exception e) {
-			throw new BizException("Undefined exception error", e);
+			throw new DemoException("Undefined exception error", e);
 		} finally {
 			this.finish();
 			param.clear();
