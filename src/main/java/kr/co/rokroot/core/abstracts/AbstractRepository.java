@@ -37,8 +37,8 @@ public abstract class AbstractRepository extends DefaultTransactionDefinition {
 
 	protected abstract SqlSessionTemplate getSqlSession();
 	protected abstract DataSourceTransactionManager getTransaction();
+	protected abstract String getRepository();
 
-	protected final String BASE_REPO = "kr.co.hbedu.open.api.server.advice.repo.BaseRepository.";
 	private TransactionStatus status;
 
 	public interface Type<T> {
@@ -118,19 +118,19 @@ public abstract class AbstractRepository extends DefaultTransactionDefinition {
 			this.start(statement);
 			switch (mapping) {
 				case SELECT_ONE:
-					result.put("result", this.getSqlSession().selectOne(this.BASE_REPO + statement, param));
+					result.put("result", this.getSqlSession().selectOne(this.getRepository() + statement, param));
 					break;
 				case SELECT_LIST:
-					result.put("result", this.getSqlSession().selectList(this.BASE_REPO + statement, param));
+					result.put("result", this.getSqlSession().selectList(this.getRepository() + statement, param));
 					break;
 				case INSERT:
-					result.put("result", this.getSqlSession().insert(this.BASE_REPO + statement, param));
+					result.put("result", this.getSqlSession().insert(this.getRepository() + statement, param));
 					break;
 				case UPDATE:
-					result.put("result", this.getSqlSession().update(this.BASE_REPO + statement, param));
+					result.put("result", this.getSqlSession().update(this.getRepository() + statement, param));
 					break;
 				case DELETE:
-					result.put("result", this.getSqlSession().delete(this.BASE_REPO + statement, param));
+					result.put("result", this.getSqlSession().delete(this.getRepository() + statement, param));
 					break;
 			}
 			this.commit();
