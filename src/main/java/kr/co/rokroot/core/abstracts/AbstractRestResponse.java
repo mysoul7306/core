@@ -6,7 +6,7 @@
 
 package kr.co.rokroot.core.abstracts;
 
-import kr.co.rokroot.core.type.ResultType;
+import kr.co.rokroot.core.types.ResultType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +18,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 public abstract class AbstractRestResponse {
+
 	protected ResultType resultType = ResultType.OK;
 	protected String resultMsg;
 	protected Integer resultCnt;

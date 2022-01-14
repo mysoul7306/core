@@ -16,6 +16,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 public abstract class AbstractRestRequest {
+
 	protected Date reqTime;
 
 	public abstract boolean hasData();

@@ -17,6 +17,8 @@ import java.util.*;
 
 public class ObjectUtility {
 
+	protected static final BeanUtilsBean beanUtilsBean;
+
 	public static Map<String, Object> castMap(Object dto) {
 		Map<String, Object> map = new HashMap<>();
 		Field[] fields = dto.getClass().getDeclaredFields();
@@ -25,6 +27,7 @@ public class ObjectUtility {
 				if (Modifier.isStatic(field.getModifiers())) {
 					continue;
 				}
+
 				field.setAccessible(true);
 				map.put(field.getName(), field.get(dto));
 			} catch (IllegalAccessException e) {
@@ -52,19 +55,22 @@ public class ObjectUtility {
 			if (value == null) {
 				return null;
 			}
+
 			if (clazz.isEnum()) {
 				return Enum.valueOf(clazz, value);
 			}
+
 			return super.convert(value, clazz);
 		}
 	};
 
-	protected static final BeanUtilsBean beanUtilsBean;
 	static {
 		DateTimeConverter dtConverter = new DateConverter();
 		dtConverter.setPattern("yyyyMMdd");
+
 		convertUtilsBean.deregister(Date.class);
 		convertUtilsBean.register(dtConverter, Date.class);
+
 		beanUtilsBean = new BeanUtilsBean(convertUtilsBean);
 	}
 }

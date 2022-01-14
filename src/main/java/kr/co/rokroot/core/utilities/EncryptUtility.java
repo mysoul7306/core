@@ -37,7 +37,6 @@ public class EncryptUtility {
 			}
 
 			result = sb.toString();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

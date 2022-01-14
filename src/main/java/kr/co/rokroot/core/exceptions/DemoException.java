@@ -6,7 +6,7 @@
 
 package kr.co.rokroot.core.exceptions;
 
-import kr.co.rokroot.core.type.ResultType;
+import kr.co.rokroot.core.types.ResultType;
 import lombok.Getter;
 
 @Getter

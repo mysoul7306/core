@@ -4,7 +4,7 @@
  * Copyrights rok_root. All rights reserved.
  */
 
-package kr.co.rokroot.core.type;
+package kr.co.rokroot.core.types;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,29 +15,29 @@ import java.util.Map;
 
 @ToString
 @AllArgsConstructor
-public enum DatabaseType {
+public enum AuthroizeType {
 
-    MariaDB("Maria database"),
-    OracleDB("Oracle database"),
-    MicrosoftDB("MS-SQL database");
+    NO("no required"),
+    JWT("JSON web token"),
+    CSRF("cross-site request forgery");
 
     @Getter
     private final String desc;
 
-    private static final Map<String, DatabaseType> values;
+    private static final Map<String, AuthroizeType> values;
     static {
         values = new HashMap<>();
-        for (DatabaseType e : DatabaseType.values()) {
+        for (AuthroizeType e : AuthroizeType.values()) {
             values.put(e.desc, e);
         }
     }
 
-    public static DatabaseType fromValue(Object value) {
+    public static AuthroizeType fromValue(Object value) {
         assert value != null;
         return fromValue(value.toString());
     }
 
-    public static DatabaseType fromValue(String value) {
+    public static AuthroizeType fromValue(String value) {
         assert value != null;
         return values.get(value.trim());
     }

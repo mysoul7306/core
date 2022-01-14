@@ -4,7 +4,7 @@
  * Copyrights rok_root. All rights reserved.
  */
 
-package kr.co.rokroot.core.wrappers;
+package kr.co.rokroot.core.wrappers.req;
 
 import kr.co.rokroot.core.abstracts.AbstractRestRequest;
 import lombok.EqualsAndHashCode;
