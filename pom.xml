@@ -23,6 +23,7 @@
 		<project.build.source.encoding>UTF-8</project.build.source.encoding>
 
 		<spring.framework.version>5.3.14</spring.framework.version>
+		<slf4j.version>2.0.2</slf4j.version>
 		<project.lombok.version>1.18.22</project.lombok.version>
 
 		<mybatis.version>3.5.9</mybatis.version>
@@ -72,6 +73,13 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.framework.version}</version>
+		</dependency>
+
+		<!-- SlF4J -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
 		</dependency>
 
 		<!-- Project lombok -->
