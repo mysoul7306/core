@@ -21,16 +21,16 @@ import java.io.Serializable;
 public class RestRequest<T extends Serializable> extends AbstractRestRequest implements Serializable {
 
 	public static <T extends Serializable> RestRequest<T> create() {
-		return new RestRequest();
+		return new RestRequest<>();
 	}
 
 	public static <T extends Serializable> RestRequest<T> create(T clazz) {
-		return new RestRequest().add(clazz);
+		return new RestRequest<T>().add(clazz);
 	}
 
 	private T data;
 
-	public RestRequest<T> add(T clazz) {
+	private RestRequest<T> add(T clazz) {
 		if (clazz == null) {
 			return this;
 		}

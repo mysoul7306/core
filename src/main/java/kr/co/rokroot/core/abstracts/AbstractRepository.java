@@ -39,62 +39,62 @@ public abstract class AbstractRepository extends DefaultTransactionDefinition {
 	protected abstract DataSourceTransactionManager getTransaction();
 	protected abstract String getRepository();
 
-	protected final String SEPARATE_STATEMENT = ".";
+	private static final String SEPARATE_STATEMENT = ".";
 
-	private TransactionStatus status;
+	private transient TransactionStatus status;
 
-	public interface Type<T> {
+	private interface Type<T> {
 		T work();
 	}
 
-	public interface TypeList<T> {
-		List<T> work(List<Map> typeList);
+	private interface TypeList<T> {
+		List<T> work(List<Map<String, Object>> typeList);
 	}
 
-	public <REQ extends Serializable, RES extends Serializable> RestSingleResponse<RES> singleWrapper(String statement, RestRequest<REQ> reqDTO, Type<RES> type){
+	public <Q extends Serializable, S extends Serializable> RestSingleResponse<S> singleWrapper(String statement, RestRequest<Q> reqDTO, Type<S> type) {
 		Map<String, Object> map = ObjectUtility.castMap(reqDTO.getData());
 
 		return this.singleWrapper(statement, map, type);
 	}
 
-	public <REQ extends Serializable, RES extends Serializable> RestListResponse<RES> listWrapper(String statement, RestRequest<REQ> reqDTO, TypeList<RES> typeList){
+	public <Q extends Serializable, S extends Serializable> RestListResponse<S> listWrapper(String statement, RestRequest<Q> reqDTO, TypeList<S> typeList) {
 		Map<String, Object> map = ObjectUtility.castMap(reqDTO.getData());
 
 		return this.listWrapper(statement, map, typeList);
 	}
 
-	public <REQ extends Serializable> RestEmptyResponse insertWrapper(String statement, RestRequest<REQ> reqDTO){
+	public <Q extends Serializable> RestEmptyResponse insertWrapper(String statement, RestRequest<Q> reqDTO) {
 		Map<String, Object> map = ObjectUtility.castMap(reqDTO.getData());
 
 		return this.insertWrapper(statement, map);
 	}
 
-	public <REQ extends Serializable> RestEmptyResponse updateWrapper(String statement, RestRequest<REQ> reqDTO){
+	public <Q extends Serializable> RestEmptyResponse updateWrapper(String statement, RestRequest<Q> reqDTO) {
 		Map<String, Object> map = ObjectUtility.castMap(reqDTO.getData());
 
 		return this.updateWrapper(statement, map);
 	}
 
 
-	protected <RES extends Serializable> RestSingleResponse<RES> singleWrapper(String statement, Map<String, Object> map, Type<RES> type) {
+	private <S extends Serializable> RestSingleResponse<S> singleWrapper(String statement, Map<String, Object> map, Type<S> type) {
 		map = this.callDatabase(QueryType.SELECT_ONE, statement, map);
 
-		RES resDTO = map.get("result") == null? null : ObjectUtility.castDTO(type.work(), (Map<String, Object>) map.get("result"));
+		S resDTO = map.get("result") == null? null : ObjectUtility.castDTO(type.work(), (Map<String, Object>) map.get("result"));
 		map.clear();
 
 		return this.setMessage(RestSingleResponse.create(resDTO).resultCnt(resDTO == null? 0 : 1));
 	}
 
-	protected <RES extends Serializable> RestListResponse<RES> listWrapper(String statement, Map<String, Object> map, TypeList<RES> typeList) {
+	private <S extends Serializable> RestListResponse<S> listWrapper(String statement, Map<String, Object> map, TypeList<S> typeList) {
 		map = this.callDatabase(QueryType.SELECT_LIST, statement, map);
 
-		List<RES> resListDTO = typeList.work(((List<Map>) map.get("result")).stream().filter(Objects::nonNull).collect(Collectors.toList()));
+		List<S> resListDTO = typeList.work(((List<Map<String, Object>>) map.get("result")).stream().filter(Objects::nonNull).collect(Collectors.toList()));
 		map.clear();
 
 		return this.setMessage(RestListResponse.create(resListDTO).resultCnt(resListDTO.size()));
 	}
 
-	protected RestEmptyResponse insertWrapper(String statement, Map<String, Object> map) {
+	private RestEmptyResponse insertWrapper(String statement, Map<String, Object> map) {
 		map = this.callDatabase(QueryType.INSERT, statement, map);
 
 		Integer result = Integer.parseInt(map.get("result") == null || Integer.parseInt(map.get("result").toString()) < 0? "0" : map.get("result").toString());
@@ -103,7 +103,7 @@ public abstract class AbstractRepository extends DefaultTransactionDefinition {
 		return this.setMessage(RestEmptyResponse.create(result));
 	}
 
-	protected RestEmptyResponse updateWrapper(String statement, Map<String, Object> map) {
+	private RestEmptyResponse updateWrapper(String statement, Map<String, Object> map) {
 		map = this.callDatabase(QueryType.UPDATE, statement, map);
 
 		Integer result = Integer.parseInt(map.get("result") == null || Integer.parseInt(map.get("result").toString()) < 0? "0" : map.get("result").toString());
@@ -112,7 +112,7 @@ public abstract class AbstractRepository extends DefaultTransactionDefinition {
 		return this.setMessage(RestEmptyResponse.create(result));
 	}
 
-	protected synchronized Map<String, Object> callDatabase(QueryType mapping, String statement, Map<String, Object> param) {
+	private synchronized Map<String, Object> callDatabase(QueryType mapping, String statement, Map<String, Object> param) {
 		statement = SEPARATE_STATEMENT + statement;
 
 		long startTime = 0L;
@@ -157,32 +157,32 @@ public abstract class AbstractRepository extends DefaultTransactionDefinition {
 		return result;
 	}
 
-	protected void start(String statement) throws TransactionException {
+	private void start(String statement) throws TransactionException {
 		this.setName(statement);
 		this.status = this.getTransaction().getTransaction(this);
 	}
 
-	protected void commit() throws TransactionException {
+	private void commit() throws TransactionException {
 		if (! this.status.isCompleted()) {
 			this.getTransaction().commit(this.status);
 		}
 	}
 
-	protected void finish() throws TransactionException {
+	private void finish() throws TransactionException {
 		if (! this.status.isCompleted()) {
 			this.getTransaction().rollback(this.status);
 		}
 	}
 
-	protected <RES extends AbstractRestResponse> RES setMessage(RES response) {
-		if (response.hasData()) {
-			response.setResultType(ResultType.OK);
-			response.setResultMsg("SUCCESS");
+	private <S extends AbstractRestResponse> S setMessage(S res) {
+		if (res.hasData()) {
+			res.setResultType(ResultType.OK);
+			res.setResultMsg("SUCCESS");
 		} else {
-			response.setResultType(ResultType.ERROR);
-			response.setResultMsg("NO DATA");
+			res.setResultType(ResultType.ERROR);
+			res.setResultMsg("NO DATA");
 		}
 
-		return response;
+		return res;
 	}
 }

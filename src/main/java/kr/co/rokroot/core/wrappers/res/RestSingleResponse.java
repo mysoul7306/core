@@ -21,11 +21,11 @@ import java.io.Serializable;
 public class RestSingleResponse<T extends Serializable> extends AbstractRestResponse implements Serializable {
 
 	public static <T extends Serializable> RestSingleResponse<T> create() {
-		return new RestSingleResponse();
+		return new RestSingleResponse<>();
 	}
 
 	public static <T extends Serializable> RestSingleResponse<T> create(T clazz) {
-		return new RestSingleResponse().add(clazz);
+		return new RestSingleResponse<T>().add(clazz);
 	}
 
 	public RestSingleResponse<T> resultCnt(Integer resultCnt) {
@@ -38,7 +38,7 @@ public class RestSingleResponse<T extends Serializable> extends AbstractRestResp
 
 	private T data;
 
-	public RestSingleResponse<T> add(T clazz) {
+	private RestSingleResponse<T> add(T clazz) {
 		if (clazz == null) {
 			return this;
 		}

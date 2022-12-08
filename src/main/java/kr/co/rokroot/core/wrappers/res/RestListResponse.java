@@ -23,15 +23,16 @@ import java.util.List;
 public class RestListResponse<T extends Serializable> extends AbstractRestResponse implements Serializable {
 
 	public static <T extends Serializable> RestListResponse<T> create(T clazz) {
-		return new RestListResponse().add(clazz);
+		return new RestListResponse<T>().add(clazz);
 	}
 
+	@SafeVarargs
 	public static <T extends Serializable> RestListResponse<T> create(T... clazz) {
-		return new RestListResponse().add(clazz);
+		return new RestListResponse<T>().add(clazz);
 	}
 
 	public static <T extends Serializable> RestListResponse<T> create(List<T> clazz) {
-		return new RestListResponse().add(clazz);
+		return new RestListResponse<T>().add(clazz);
 	}
 
 	public RestListResponse<T> resultCnt(Integer resultCnt) {
@@ -44,7 +45,7 @@ public class RestListResponse<T extends Serializable> extends AbstractRestRespon
 
 	private List<T> data = new ArrayList<>();
 
-	public RestListResponse<T> add(T clazz) {
+	private RestListResponse<T> add(T clazz) {
 		if (clazz == null) {
 			return this;
 		}
@@ -52,7 +53,8 @@ public class RestListResponse<T extends Serializable> extends AbstractRestRespon
 		return this;
 	}
 
-	public RestListResponse<T> add(T... ts) {
+	@SafeVarargs
+	private final RestListResponse<T> add(T... ts) {
 		if (ts == null || ts.length == 0) {
 			return this;
 		}
@@ -62,7 +64,7 @@ public class RestListResponse<T extends Serializable> extends AbstractRestRespon
 		return this;
 	}
 
-	public RestListResponse<T> add(List<T> list) {
+	private RestListResponse<T> add(List<T> list) {
 		if (list == null) {
 			return this;
 		}

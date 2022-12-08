@@ -6,10 +6,8 @@
 
 package kr.co.rokroot.core.utilities;
 
-import org.apache.commons.beanutils.BeanUtilsBean;
-import org.apache.commons.beanutils.ConvertUtilsBean;
-import org.apache.commons.beanutils.converters.DateConverter;
-import org.apache.commons.beanutils.converters.DateTimeConverter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import kr.co.rokroot.core.exceptions.DemoException;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -17,18 +15,17 @@ import java.util.*;
 
 public class ObjectUtility {
 
-	protected static final BeanUtilsBean beanUtilsBean;
+	private static final ObjectMapper mapper = new ObjectMapper();
+	private ObjectUtility() {
+		throw new DemoException("Don't create instance.", new RuntimeException());
+	}
 
 	public static Map<String, Object> castMap(Object dto) {
 		Map<String, Object> map = new HashMap<>();
 		Field[] fields = dto.getClass().getDeclaredFields();
 		for (Field field : fields) {
 			try {
-				if (Modifier.isStatic(field.getModifiers())) {
-					continue;
-				}
-
-				field.setAccessible(true);
+				if (Modifier.isStatic(field.getModifiers())) continue;
 				map.put(field.getName(), field.get(dto));
 			} catch (IllegalAccessException e) {
 				e.printStackTrace();
@@ -40,37 +37,11 @@ public class ObjectUtility {
 
 	public static <T> T castDTO(T dto, Map<String, Object> map) {
 		try {
-			beanUtilsBean.populate(dto, map);
+			mapper.convertValue(map, dto.getClass());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return dto;
-	}
-
-
-	protected static final ConvertUtilsBean convertUtilsBean = new ConvertUtilsBean() {
-		@Override
-		public Object convert(String value, Class clazz) {
-			if (value == null) {
-				return null;
-			}
-
-			if (clazz.isEnum()) {
-				return Enum.valueOf(clazz, value);
-			}
-
-			return super.convert(value, clazz);
-		}
-	};
-
-	static {
-		DateTimeConverter dtConverter = new DateConverter();
-		dtConverter.setPattern("yyyyMMdd");
-
-		convertUtilsBean.deregister(Date.class);
-		convertUtilsBean.register(dtConverter, Date.class);
-
-		beanUtilsBean = new BeanUtilsBean(convertUtilsBean);
 	}
 }

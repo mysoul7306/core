@@ -19,10 +19,10 @@ import java.util.Date;
 @NoArgsConstructor
 public abstract class AbstractRestResponse {
 
-	protected ResultType resultType = ResultType.OK;
-	protected String resultMsg;
+	private ResultType resultType = ResultType.OK;
+	private String resultMsg;
 	protected Integer resultCnt;
-	protected Date resTime = DateTime.now().toDate();
+	private Date resTime = DateTime.now().toDate();
 
 	public abstract boolean hasData();
 }
