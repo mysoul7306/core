@@ -211,17 +211,10 @@
             <artifactId>log4j-api</artifactId>
             <version>${apache.log4j.version}</version>
         </dependency>
-
-        <!-- SlF4J -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-reload4j</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${apache.log4j.version}</version>
         </dependency>
 
         <!-- Jackson -->
