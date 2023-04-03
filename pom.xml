@@ -23,27 +23,27 @@
 		<maven.plugins.version>3.3.0</maven.plugins.version>
         <project.build.source.encoding>UTF-8</project.build.source.encoding>
 
-        <spring.framework.version>6.0.2</spring.framework.version>
+        <spring.framework.version>6.0.6</spring.framework.version>
         <jasypt.version>1.9.3</jasypt.version>
         <slf4j.version>2.0.5</slf4j.version>
-        <project.lombok.version>1.18.24</project.lombok.version>
+        <project.lombok.version>1.18.26</project.lombok.version>
         <hibernate.validation.version>8.0.0.Final</hibernate.validation.version>
 
-        <mybatis.version>3.5.11</mybatis.version>
-        <mybatis.spring.version>3.0.0</mybatis.spring.version>
+        <mybatis.version>3.5.13</mybatis.version>
+        <mybatis.spring.version>3.0.1</mybatis.spring.version>
         <hibernate.jpa.version>1.0.2.Final</hibernate.jpa.version>
         <querydsl.version>5.0.0</querydsl.version>
 
-        <joda.time.version>2.12.1</joda.time.version>
+        <joda.time.version>2.12.2</joda.time.version>
         <apache.commons.version>2.11.0</apache.commons.version>
         <apache.dbcp.version>2.9.0</apache.dbcp.version>
         <apache.lang.version>3.12.0</apache.lang.version>
         <apache.beanutils.version>1.9.4</apache.beanutils.version>
-        <apache.log4j.version>2.19.0</apache.log4j.version>
+        <apache.log4j.version>2.20.0</apache.log4j.version>
 
-        <fasterxml.jackson.version>2.14.0</fasterxml.jackson.version>
-        <snake.yaml.version>1.33</snake.yaml.version>
-        <google.gson.version>2.10</google.gson.version>
+        <fasterxml.jackson.version>2.14.2</fasterxml.jackson.version>
+        <snake.yaml.version>2.0</snake.yaml.version>
+        <google.gson.version>2.10.1</google.gson.version>
     </properties>
 
     <repositories>
