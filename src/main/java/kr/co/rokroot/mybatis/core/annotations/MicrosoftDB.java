@@ -4,7 +4,7 @@
  * Copyrights rok_root. All rights reserved.
  */
 
-package kr.co.rokroot.core.annotations;
+package kr.co.rokroot.mybatis.core.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface OracleDB {
+public @interface MicrosoftDB {
 
 
 

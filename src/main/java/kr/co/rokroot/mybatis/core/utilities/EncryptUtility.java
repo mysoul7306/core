@@ -4,7 +4,7 @@
  * Copyrights rok_root. All rights reserved.
  */
 
-package kr.co.rokroot.core.utilities;
+package kr.co.rokroot.mybatis.core.utilities;
 
 import org.apache.commons.lang3.StringUtils;
 

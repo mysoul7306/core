@@ -4,11 +4,10 @@
  * Copyrights rok_root. All rights reserved.
  */
 
-package kr.co.rokroot.core.utilities;
+package kr.co.rokroot.mybatis.core.utilities;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.co.rokroot.core.exceptions.DemoException;
-import org.yaml.snakeyaml.Yaml;
+import kr.co.rokroot.mybatis.core.exceptions.DemoException;
 
 import java.io.IOException;
 import java.io.InputStream;

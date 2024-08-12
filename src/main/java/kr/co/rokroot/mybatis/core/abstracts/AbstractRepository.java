@@ -4,16 +4,16 @@
  * Copyrights rok_root. All rights reserved.
  */
 
-package kr.co.rokroot.core.abstracts;
+package kr.co.rokroot.mybatis.core.abstracts;
 
-import kr.co.rokroot.core.exceptions.DemoException;
-import kr.co.rokroot.core.types.QueryType;
-import kr.co.rokroot.core.types.ResultType;
-import kr.co.rokroot.core.utilities.ObjectUtility;
-import kr.co.rokroot.core.wrappers.res.RestEmptyResponse;
-import kr.co.rokroot.core.wrappers.res.RestListResponse;
-import kr.co.rokroot.core.wrappers.req.RestRequest;
-import kr.co.rokroot.core.wrappers.res.RestSingleResponse;
+import kr.co.rokroot.mybatis.core.exceptions.DemoException;
+import kr.co.rokroot.mybatis.core.types.QueryType;
+import kr.co.rokroot.mybatis.core.types.ResultType;
+import kr.co.rokroot.mybatis.core.utilities.ObjectUtility;
+import kr.co.rokroot.mybatis.core.wrappers.res.RestEmptyResponse;
+import kr.co.rokroot.mybatis.core.wrappers.res.RestListResponse;
+import kr.co.rokroot.mybatis.core.wrappers.req.RestRequest;
+import kr.co.rokroot.mybatis.core.wrappers.res.RestSingleResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.MyBatisSystemException;
 import org.mybatis.spring.SqlSessionTemplate;

@@ -4,7 +4,7 @@
  * Copyrights rok_root. All rights reserved.
  */
 
-package kr.co.rokroot.core.annotations;
+package kr.co.rokroot.mybatis.core.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -4,10 +4,10 @@
  * Copyrights rok_root. All rights reserved.
  */
 
-package kr.co.rokroot.core.utilities;
+package kr.co.rokroot.mybatis.core.utilities;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.co.rokroot.core.exceptions.DemoException;
+import kr.co.rokroot.mybatis.core.exceptions.DemoException;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

@@ -4,7 +4,7 @@
  * Copyrights rok_root. All rights reserved.
  */
 
-package kr.co.rokroot.core.abstracts;
+package kr.co.rokroot.mybatis.core.abstracts;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

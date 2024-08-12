@@ -4,9 +4,9 @@
  * Copyrights rok_root. All rights reserved.
  */
 
-package kr.co.rokroot.core.abstracts;
+package kr.co.rokroot.mybatis.core.abstracts;
 
-import kr.co.rokroot.core.types.ResultType;
+import kr.co.rokroot.mybatis.core.types.ResultType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
